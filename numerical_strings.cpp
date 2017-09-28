@@ -54,7 +54,9 @@ string add_numerical_string (string s1, string s2){
         carry = total / 10;
         s = to_string(total % 10) + s;
     }
-
+    if(carry != 0){
+        s_temp = to_string(carry) + s_temp;
+    }
     remove_leading_zeros(s);
     return s;
 }
@@ -112,6 +114,9 @@ string mul_numerical_string (string s1, string s2){
             int total = (s1_digit * s2_digit) + carry;
             carry = total / 10;
             s_temp = to_string(total % 10) + s_temp;
+        }
+	if(carry != 0){
+            s_temp = to_string(carry) + s_temp;
         }
         append_zeros(s_temp, i);
         rows.push_back(s_temp);
