@@ -55,7 +55,7 @@ string add_numerical_string (string s1, string s2){
         s = to_string(total % 10) + s;
     }
     if(carry != 0){
-        s_temp = to_string(carry) + s_temp;
+        s = to_string(carry) + s;
     }
     remove_leading_zeros(s);
     return s;
