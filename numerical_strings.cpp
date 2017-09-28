@@ -1,6 +1,9 @@
-#include <iostream>
-#include <string>
+#include <cmath>
+#include <cstdio>
 #include <vector>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
 
 using namespace std;
 
@@ -31,8 +34,8 @@ void append_zeros(string &num, int amount){
     }
 }
 
-void remove_leading_zeros(string &num && num.length()>1){
-    while(num.substr(0,1) == "0"){
+void remove_leading_zeros(string &num){
+    while(num.substr(0,1) == "0" && num.length()>1){
         num = num.substr(1, num.length()-1);
     }
 }
@@ -57,6 +60,7 @@ string add_numerical_string (string s1, string s2){
     if(carry != 0){
         s = to_string(carry) + s;
     }
+
     remove_leading_zeros(s);
     return s;
 }
@@ -115,8 +119,9 @@ string mul_numerical_string (string s1, string s2){
             carry = total / 10;
             s_temp = to_string(total % 10) + s_temp;
         }
-	if(carry != 0){
+        if(carry != 0){
             s_temp = to_string(carry) + s_temp;
+            carry = 0;
         }
         append_zeros(s_temp, i);
         rows.push_back(s_temp);
@@ -166,15 +171,27 @@ bool greater_than_numerical_string (string s1, string s2){
 	return false;
 }
 
-int main()
-{
-    string s1 ("123");
-    string s2 ("123");
-    bool s = greater_than_numerical_string(s1, s2);
-    cout << s << endl;
+bool less_than_numerical_string (string s1, string s2){
 
-    return 0;
+	if(equal_to_numerical_string(s1, s2)){
+		return false;
+	}
+
+	remove_leading_zeros(s1);
+	remove_leading_zeros(s2);
+
+	if(s1.length() > s2.length()){
+		return false;
+	}else if(s2.length() > s1.length()){
+		return true;
+	}
+
+	for(int i = 0; i < s1.length(); i++){
+		if(char_to_int(s1.at(i)) > char_to_int(s2.at(i))){
+			return false;
+		}else if(char_to_int(s1.at(i)) < char_to_int(s2.at(i))){
+			return true;
+		}
+	}
+	return false;
 }
-
-
-
