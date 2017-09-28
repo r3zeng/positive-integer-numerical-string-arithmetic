@@ -125,11 +125,47 @@ string mul_numerical_string (string s1, string s2){
     return s;
 }
 
+bool equal_to_numerical_string (string s1, string s2){
+	remove_leading_zeros(s1);
+	remove_leading_zeros(s2);
+
+	if(s1 == s2){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool greater_than_numerical_string (string s1, string s2){
+
+	if(equal_to_numerical_string(s1, s2)){
+		return false;
+	}
+
+	remove_leading_zeros(s1);
+	remove_leading_zeros(s2);
+
+	if(s1.length() > s2.length()){
+		return true;
+	}else if(s2.length() > s1.length()){
+		return false;
+	}
+
+	for(int i = 0; i < s1.length(); i++){
+		if(char_to_int(s1.at(i)) > char_to_int(s2.at(i))){
+			return true;
+		}else if(char_to_int(s1.at(i)) < char_to_int(s2.at(i))){
+			return false;
+		}
+	}
+	return false;
+}
+
 int main()
 {
-    string s1 ("2341");
-    string s2 ("23424");
-    string s = mul_numerical_string(s1, s2);
+    string s1 ("123");
+    string s2 ("123");
+    bool s = greater_than_numerical_string(s1, s2);
     cout << s << endl;
 
     return 0;
