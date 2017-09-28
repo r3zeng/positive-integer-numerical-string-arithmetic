@@ -31,7 +31,7 @@ void append_zeros(string &num, int amount){
     }
 }
 
-void remove_leading_zeros(string &num){
+void remove_leading_zeros(string &num && num.length()>1){
     while(num.substr(0,1) == "0"){
         num = num.substr(1, num.length()-1);
     }
